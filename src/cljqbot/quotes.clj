@@ -4,14 +4,18 @@
             [tick.core :as t])
   (:import [clojure.lang IDeref]))
 
+
 (defonce requested (atom 0)) ; how many quotes were delivered
+
+(def quote-url "https://gist.githubusercontent.com/MaterialFuture/a16f23ffc73cd0a0b00a4a5a8033e53b/raw/56bf3ea6adf7049dd04286d8affc98a2526ff851/quotes.edn")
+;; Quotes are already parsed as needed
 
 
 (defn cached
   "Returns an IDeref that holds a value for the given amount of time before
   recreating it by calling load-fn"
   [load-fn ttl-millis]
-  (let [write-time (atom (Long/MIN_VALUE))                  ;; MIN_VALUE to force load on first deref
+  (let [write-time (atom (Long/MIN_VALUE)) ;; MIN_VALUE to force load on first deref
         cache (atom nil)]
     (reify IDeref
       (deref [_]
@@ -32,8 +36,7 @@
 
 (defn ^:private fetch-quotes
   []
-  (let [quotes (-> (slurp "https://github.com/Azel4231/clojure-quotes/raw/master/quotes.edn")
-                   (string/replace "#:clojure-quotes.core" "")
+  (let [quotes (-> (slurp quote-url) ;pull from quote-url
                    read-string
                    trim-strings)]
     {:all       quotes

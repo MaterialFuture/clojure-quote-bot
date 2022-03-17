@@ -1,6 +1,6 @@
 (defproject cljqbot "0.1.0-SNAPSHOT"
-  :description "Bot that posts various Clojure quotes taken from https://github.com/Azel4231/clojure-quotes to Telegram"
-  :url "https://github.com/NPException/Clojure-Quotes-Bot"
+  :description "Bot that posts various quotes"
+  :url "https://github.com/MaterialFuture/clojure-quote-bot"
   :license {:name "MIT License"
             :url "https://opensource.org/licenses/MIT"}
   :pedantic? :abort
